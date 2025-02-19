@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEasy - Your Online Store</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+ <!-- Enhanced Navigation -->
+ <nav class="navbar navbar-expand-lg sticky-top</nav>">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <i class="fas fa-shopping-bag me-2"></i>ShopEasy
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="#home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#products">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#categories">Categories</a>
+                </li>
+            </ul>
+            
+            <!-- Enhanced Search Bar -->
+            <div class="search-bar me-3">
+                <i class="fas fa-search"></i>
+                <input type="text" class="form-control" placeholder="Search products..." id="searchInput">
+                <div class="search-results" id="searchResults">
+                    <!-- Search results will be populated here -->
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center">
+                <button class="cart-btn me-2" data-bs-toggle="modal" data-bs-target="#cartModal">
+                    <i class="fas fa-shopping-cart me-1"></i>
+                    <span class="badge bg-danger" id="cartCount">0</span>
+                </button>
+                <button class="login-btn" data-bs-toggle="modal" data-bs-target="#loginModal">
+                    <i class="fas fa-user me-1"></i> Login
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+       <!-- New Video Banner Section -->
+<section class="video-banner">
+    <video autoplay muted loop style="width: 100%; height: 100%; object-fit: cover;">
+        <source src="../assets/animation.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay">
+        <div class="container">
+            <h2 class="display-4 mb-4">Experience Shopping Like Never Before</h2>
+            <p class="lead mb-4">Discover our latest collections and exclusive deals</p>
+            <button class="btn btn-primary btn-lg">Shop Now</button>
+        </div>
+    </div>
+</section>
+<!-- Trending Products Section -->
+<section class="trending-products">
+    <div class="container">
+        <h2 class="text-center mb-5">Trending Now</h2>
+        <div class="row">
+            <!-- Trending Product Cards with Quick View -->
+            <div class="col-md-3 mb-4">
+                <div class="product-card">
+                    <img src="../assets/tanding.png" alt="Trending Product" class="w-100">
+                    <div class="product-overlay">
+                        <button class="btn btn-light" onclick="showQuickView(1)">Quick View</button>
+                    </div>
+                    <button class="wishlist-btn" onclick="toggleWishlist(this)">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Repeat for more products -->
+        </div>
+    </div>
+</section>
+   <!-- Enhanced Categories Section -->
+   <section id="categories" class="category-section">
+    <div class="container">
+        <h2 class="text-center mb-5">Shop by Category</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="category-card category-1">
+                    <i class="fas fa-tshirt category-icon"></i>
+                    <h3 class="category-title">Fashion</h3>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="category-card category-2">
+                    <i class="fas fa-mobile-alt category-icon"></i>
+                    <h3 class="category-title">Electronics</h3>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="category-card category-3">
+                    <i class="fas fa-home category-icon"></i>
+                    <h3 class="category-title">Home & Living</h3>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="category-card category-4">
+                    <i class="fas fa-gamepad category-icon"></i>
+                    <h3 class="category-title">Gaming</h3>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="category-card category-5">
+                    <i class="fas fa-utensils category-icon"></i>
+                    <h3 class="category-title">Kitchen</h3>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="category-card category-6">
+                    <i class="fas fa-book category-icon"></i>
+                    <h3 class="category-title">Books</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Products Section -->
+    <section id="products" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Featured Products</h2>
+            <div class="row g-4" id="productList">
+                <!-- Products will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Shopping Cart</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="cartItems">
+                        <!-- Cart items will be displayed here -->
+                    </div>
+                    <div class="text-end mt-3">
+                        <h4>Total: Rs<span id="cartTotal">0.00</span></h4>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="checkoutBtn">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label class="form-label">Email address</label>
+                            <input type="email" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Featured Collections -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Featured Collections</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="collection-card fade-in">
+                    <img src="../assets/summeer.png" alt="Summer Collection" class="collection-image">
+                    <div class="collection-overlay">
+                        <h3>Summer Collection</h3>
+                        <p>Discover refreshing styles</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="collection-card fade-in">
+                    <img src="../assets/electronic.png" alt="Tech Gadgets" class="collection-image">
+                    <div class="collection-overlay">
+                        <h3>Tech Gadgets</h3>
+                        <p>Latest innovations</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="collection-card fade-in">
+                    <img src="../assets/homedecoration.png" alt="Home Decor" class="collection-image">
+                    <div class="collection-overlay">
+                        <h3>Home Decor</h3>
+                        <p>Transform your space</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Benefits Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Why Choose Us</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="benefit-card fade-in">
+                    <i class="fas fa-truck benefit-icon float-animation"></i>
+                    <h4>Free Shipping</h4>
+                    <p>On orders over Rs500</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="benefit-card fade-in">
+                    <i class="fas fa-undo benefit-icon float-animation"></i>
+                    <h4>Easy Returns</h4>
+                    <p>30-day return policy</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="benefit-card fade-in">
+                    <i class="fas fa-lock benefit-icon float-animation"></i>
+                    <h4>Secure Payment</h4>
+                    <p>100% secure checkout</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="benefit-card fade-in">
+                    <i class="fas fa-headset benefit-icon float-animation"></i>
+                    <h4>24/7 Support</h4>
+                    <p>Round the clock assistance</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter-section">
+    <div class="container text-center">
+        <h2 class="mb-4">Subscribe to Our Newsletter</h2>
+        <p class="mb-4">Get the latest updates about new products and special offers</p>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form class="d-flex gap-2">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email">
+                    <button class="btn btn-primary px-4">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Flash Deal Section -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Flash Deals</h2>
+        <div class="deal-timer">
+            <div class="timer-box">
+                <div class="hours">24</div>
+                <small>Hours</small>
+            </div>
+            <div class="timer-box">
+                <div class="minutes">00</div>
+                <small>Minutes</small>
+            </div>
+            <div class="timer-box">
+                <div class="seconds">00</div>
+                <small>Seconds</small>
+            </div>
+        </div>
+        <!-- Deal Products -->
+    </div>
+</section>
+
+<!-- Brand Showcase -->
+<section class="brand-showcase">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-2 col-6 text-center mb-4">
+                <img src="/api/placeholder/120/60" alt="Brand 1" class="brand-logo">
+            </div>
+            <!-- Repeat for more brands -->
+        </div>
+    </div>
+</section>
+
+<!-- Customer Reviews -->
+<section class="customer-reviews">
+    <div class="container">
+        <h2 class="text-center mb-5">What Our Customers Say</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="review-card fade-in">
+                    <div class="stars mb-2">
+                        ⭐⭐⭐⭐⭐
+                    </div>
+                    <p>"Amazing products and fast delivery! Will definitely shop again."</p>
+                    <div class="reviewer">
+                        <strong>John Doe</strong>
+                        <small class="text-muted">Verified Buyer</small>
+                    </div>
+                </div>
+            </div>
+            <!-- Repeat for more reviews -->
+        </div>
+    </div>
+</section>
+
+<!-- Quick View Modal -->
+<div class="quick-view-overlay" id="quickView">
+    <div class="quick-view-content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="product-gallery">
+                    <img src="../assets/jacket3.png" alt="Main Product" class="w-100 mb-3">
+                    <div class="d-flex">
+                        <img src="../assets/jacket3.png" alt="Thumb 1" class="gallery-thumb">
+                        <img src="../assets/jacket1.png" alt="Thumb 2" class="gallery-thumb">
+                        <img src="../assets/jacket2.png" alt="Thumb 3" class="gallery-thumb">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h3>Product Name</h3>
+                <p class="text-muted">Category</p>
+                <div class="price h4 mb-4">Rs999.99</div>
+                
+                <div class="color-selector">
+                    <div class="color-option" style="background: red;"></div>
+                    <div class="color-option" style="background: blue;"></div>
+                    <div class="color-option" style="background: green;"></div>
+                </div>
+                
+                <div class="size-selector">
+                    <div class="size-option">S</div>
+                    <div class="size-option">M</div>
+                    <div class="size-option">L</div>
+                    <div class="size-option">XL</div>
+                </div>
+                
+                <button class="btn btn-primary w-100 mt-4">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <h4 class="footer-title">ShopEasy</h4>
+                <p>Your one-stop destination for all shopping needs. Quality products, great prices, and excellent service.</p>
+                <div class="social-links mt-3">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <h4 class="footer-title">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h4 class="footer-title">Customer Service</h4>
+                <ul class="footer-links">
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Shipping Information</a></li>
+                    <li><a href="#">Returns & Exchanges</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h4 class="footer-title">Contact Info</h4>
+                <ul class="footer-links">
+                    <li><i class="fas fa-map-marker-alt me-2"></i> 123 Shopping St, NY 10001</li>
+                    <li><i class="fas fa-phone me-2"></i> +91 123456789</li>
+                    <li><i class="fas fa-envelope me-2"></i> info@shopeasy.com</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom text-center">
+        <div class="container">
+            <p class="mb-0">© 2025 ShopEasy. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="../script.js"></script>
+</body>
+</html>
