@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Navbar</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Main Navigation Container -->
+    <nav class="navbar">
+        <!-- Logo Section -->
+        <div class="navbar-logo">
+            <a href="#"><span>Brand</span>Logo</a>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <div class="navbar-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
+        <!-- Navigation Links Container -->
+        <div class="navbar-links">
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                
+                <!-- Dropdown Menu 1 -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Products <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Category 1</a></li>
+                        <li><a href="#">Category 2</a></li>
+                        <li><a href="#">Category 3</a></li>
+                        <li class="dropdown-submenu">
+                            <a href="#">More Options <i class="fas fa-chevron-right"></i></a>
+                            <ul class="submenu">
+                                <li><a href="#">Sub Item 1</a></li>
+                                <li><a href="#">Sub Item 2</a></li>
+                                <li><a href="#">Sub Item 3</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- Dropdown Menu 2 -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Service 1</a></li>
+                        <li><a href="#">Service 2</a></li>
+                        <li><a href="#">Service 3</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Search and Action Buttons -->
+        <div class="navbar-actions">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            <a href="#" class="action-btn"><i class="fas fa-user"></i></a>
+            <a href="#" class="action-btn"><i class="fas fa-shopping-cart"></i><span class="badge">3</span></a>
+        </div>
+    </nav>
+
+    <!-- Page Content for Demo -->
+    <div class="content">
+        <h1>Advanced Navbar Example</h1>
+        <p>Scroll down to see the sticky navbar in action</p>
+        <div style="height: 150vh;"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
